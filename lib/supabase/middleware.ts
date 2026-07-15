@@ -30,13 +30,12 @@ export async function updateSession(request: NextRequest) {
   // Refresh session
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Protect /dashboard — redirect to /login if not authenticated
-  if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/login';
-    url.searchParams.set('redirect', request.nextUrl.pathname);
-    return NextResponse.redirect(url);
-  }
+  // Allow unauthenticated access to /dashboard for guest mode
+  // if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
+  //   const url = request.nextUrl.clone();
+  //   url.pathname = '/login';
+  //   return NextResponse.redirect(url);
+  // }
 
   // If logged in and visiting /login or /register, redirect to dashboard
   if (user && (

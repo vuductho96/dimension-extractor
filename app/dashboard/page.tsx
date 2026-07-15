@@ -60,7 +60,10 @@ export default function DashboardPage() {
   useEffect(() => {
     (async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { router.replace('/login'); return; }
+      if (!user) {
+        setUserEmail('Khách (Guest)');
+        return;
+      }
       setUserEmail(user.email ?? '');
       setUserId(user.id);
       await loadJobs(user.id);
@@ -151,7 +154,11 @@ export default function DashboardPage() {
 
   // ── Save job ──────────────────────────────────────────────
   const saveJob = async () => {
-    if (!file || results.length === 0 || !userId) return;
+    if (!file || results.length === 0) return;
+    if (!userId) {
+      toast('Tính năng lưu trực tuyến chỉ dành cho thành viên. Vui lòng đăng nhập!');
+      return;
+    }
     const payload = {
       user_id:    userId,
       filename:   file.name,
@@ -258,10 +265,14 @@ export default function DashboardPage() {
 
         <div className="dash-header-right">
           <div className="dash-user">
-            <div className="dash-avatar">{initials}</div>
+            <div className="dash-avatar">{!userId ? 'G' : initials}</div>
             <span>{userEmail}</span>
           </div>
-          <button className="dash-logout" onClick={logout}>Đăng xuất</button>
+          {!userId ? (
+            <Link href="/login" className="dash-logout" style={{textDecoration: 'none'}}>Đăng nhập</Link>
+          ) : (
+            <button className="dash-logout" onClick={logout}>Đăng xuất</button>
+          )}
         </div>
       </header>
 
@@ -282,7 +293,11 @@ export default function DashboardPage() {
           <div className="sidebar-jobs">
             {jobs.length === 0 ? (
               <div className="sidebar-empty">
-                <p>Chưa có job nào.<br/>Tải PDF và trích xuất để tạo job đầu tiên.</p>
+                {!userId ? (
+                  <p>Bạn đang dùng thử (Guest).<br/>Hãy <Link href="/login" style={{color: 'var(--blue)'}}>đăng nhập</Link> để lưu lịch sử bản vẽ.</p>
+                ) : (
+                  <p>Chưa có job nào.<br/>Tải PDF và trích xuất để tạo job đầu tiên.</p>
+                )}
               </div>
             ) : jobs.map(j => (
               <div
