@@ -407,26 +407,35 @@ export default function DashboardPage() {
               </label>
             ) : (
               <div className="scanning-overlay">
-                <canvas ref={canvasRef} className="pdf-canvas" />
-                
-                {/* ── Highlights ── */}
-                {results.map(r => {
-                  if (r.x === undefined || r.y === undefined) return null;
-                  const scale = 1.6;
-                  const height = (r.height ?? 10) * scale;
-                  const top = (r.y * scale) - height;
-                  const left = (r.x * scale) - 2;
-                  const width = ((r.width ?? 30) * scale) + 4;
+                <div className="pdf-canvas-container">
+                  <canvas ref={canvasRef} className="pdf-canvas" />
                   
-                  return (
-                    <div
-                      key={r.id}
-                      className={`dimension-marker ${hoveredDimId === r.id ? 'is-active' : ''}`}
-                      style={{ top, left, width, height }}
-                      title={r.nominal}
-                    />
-                  );
-                })}
+                  {/* ── Highlights ── */}
+                  {results.map(r => {
+                    if (r.x === undefined || r.y === undefined) return null;
+                    const scale = 1.6;
+                    // Provide defaults and some padding
+                    const w = r.width ?? 30;
+                    const h = r.height ?? 10;
+                    const height = h * scale;
+                    // Y in pdf.js is from bottom, but item.transform[5] is the bottom of the text.
+                    // We flip it in pdf-extractor as: y = viewport.height - ty
+                    // So y is the BOTTOM of the text from the top of the canvas (at scale 1.0).
+                    // Top coordinate is (y * scale) - height
+                    const top = (r.y * scale) - height;
+                    const left = (r.x * scale) - 2;
+                    const width = (w * scale) + 4;
+                    
+                    return (
+                      <div
+                        key={r.id}
+                        className={`dimension-marker ${hoveredDimId === r.id ? 'is-active' : ''}`}
+                        style={{ top, left, width, height }}
+                        title={r.nominal}
+                      />
+                    );
+                  })}
+                </div>
 
                 {scanning && (
                   <div className="scan-progress">

@@ -642,8 +642,13 @@ svg { display: block; }
   font-weight: 750;
   cursor: pointer;
 }
-.pdf-canvas {
+.pdf-canvas-container {
+  position: relative;
   margin: auto;
+  width: max-content;
+}
+.pdf-canvas {
+  display: block;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
