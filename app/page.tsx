@@ -188,7 +188,7 @@ export default function LandingPage() {
             ) : (
               <>
                 <Link href="/login"    className="btn-login">Đăng nhập</Link>
-                <Link href="/register" className="button button-small">{CONTENT.nav.cta}</Link>
+                <Link href="/dashboard" className="button button-small">Dùng thử ngay</Link>
               </>
             )}
           </div>
@@ -473,8 +473,8 @@ export default function LandingPage() {
             <h2>{CONTENT.cta.title}</h2>
             <p>{CONTENT.cta.description}</p>
             <div className="cta-actions">
-              <Link href={user ? '/dashboard' : '/register'} className="button button-light">
-                <span>Bắt đầu miễn phí</span>
+              <Link href="/dashboard" className="button button-light">
+                <span>Dùng thử không cần Đăng nhập</span>
                 <span aria-hidden="true">→</span>
               </Link>
               <button className="button-link-light" type="button" onClick={() => runSample()}>
@@ -482,7 +482,7 @@ export default function LandingPage() {
               </button>
             </div>
             <p className="cta-note" ref={uploadNoteRef}>
-              Đăng ký miễn phí · PDF xử lý hoàn toàn trong trình duyệt của bạn.
+              Trải nghiệm ngay · Không cần tạo tài khoản · PDF xử lý hoàn toàn trong trình duyệt của bạn.
             </p>
           </div>
         </section>
