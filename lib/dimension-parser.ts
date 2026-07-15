@@ -27,6 +27,8 @@ export interface DimensionResult {
   rawText: string;
   x?: number;
   y?: number;
+  width?: number;
+  height?: number;
 }
 
 // ----------------------------------------------------------------
@@ -79,7 +81,7 @@ function normalise(s: string) {
 }
 
 export function parseDimensions(
-  rawTextItems: { text: string; x?: number; y?: number }[]
+  rawTextItems: { text: string; x?: number; y?: number; width?: number; height?: number }[]
 ): DimensionResult[] {
   const results: DimensionResult[] = [];
   let counter = 0;
@@ -87,7 +89,7 @@ export function parseDimensions(
   // First pass: join nearby tokens into candidate strings
   // We process each text item independently; adjacent tokens
   // are also merged pair-wise for multi-token dimensions.
-  const texts: { text: string; x?: number; y?: number }[] = [];
+  const texts: { text: string; x?: number; y?: number; width?: number; height?: number }[] = [];
 
   for (let i = 0; i < rawTextItems.length; i++) {
     const cur = rawTextItems[i];
@@ -95,10 +97,12 @@ export function parseDimensions(
     texts.push(cur);
     if (next) {
       // Merge if items are close (within ~40 units)
-      const dx = Math.abs((next.x ?? 0) - (cur.x ?? 0) - ((cur as any).width ?? 0));
+      const dx = Math.abs((next.x ?? 0) - (cur.x ?? 0) - (cur.width ?? 0));
       if (dx < 60) {
-        texts.push({ text: cur.text + next.text, x: cur.x, y: cur.y });
-        texts.push({ text: cur.text + ' ' + next.text, x: cur.x, y: cur.y });
+        const mergedWidth = ((next.x ?? cur.x ?? 0) - (cur.x ?? 0)) + (next.width ?? cur.width ?? 0);
+        const mergedHeight = Math.max(cur.height ?? 0, next.height ?? 0);
+        texts.push({ text: cur.text + next.text, x: cur.x, y: cur.y, width: mergedWidth, height: mergedHeight });
+        texts.push({ text: cur.text + ' ' + next.text, x: cur.x, y: cur.y, width: mergedWidth, height: mergedHeight });
       }
     }
   }
@@ -118,7 +122,7 @@ export function parseDimensions(
     });
   };
 
-  for (const { text: rawText, x, y } of texts) {
+  for (const { text: rawText, x, y, width, height } of texts) {
     const text = normalise(rawText.trim());
     if (!text) continue;
 
@@ -138,6 +142,8 @@ export function parseDimensions(
           rawText: text,
           x,
           y,
+          width,
+          height,
         });
         continue;
       }
@@ -157,6 +163,8 @@ export function parseDimensions(
           rawText: text,
           x,
           y,
+          width,
+          height,
         });
         continue;
       }
@@ -174,6 +182,8 @@ export function parseDimensions(
         rawText: text,
         x,
         y,
+        width,
+        height,
       });
       continue;
     }
@@ -190,6 +200,8 @@ export function parseDimensions(
         rawText: text,
         x,
         y,
+        width,
+        height,
       });
       continue;
     }
@@ -209,6 +221,8 @@ export function parseDimensions(
           rawText: text,
           x,
           y,
+          width,
+          height,
         });
         continue;
       }
@@ -229,6 +243,8 @@ export function parseDimensions(
         rawText: text,
         x,
         y,
+        width,
+        height,
       });
       continue;
     }
@@ -249,6 +265,8 @@ export function parseDimensions(
           rawText: text,
           x,
           y,
+          width,
+          height,
         });
         continue;
       }
@@ -271,6 +289,8 @@ export function parseDimensions(
         rawText: text,
         x,
         y,
+        width,
+        height,
       });
     }
   }

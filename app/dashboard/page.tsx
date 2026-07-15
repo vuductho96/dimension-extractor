@@ -51,6 +51,8 @@ export default function DashboardPage() {
   const [scanning, setScanning]     = useState(false);
   const [results, setResults]       = useState<DimensionResult[]>([]);
   const [dragOver, setDragOver]     = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [hoveredDimId, setHoveredDimId] = useState<string | null>(null);
 
   // Refs
   const canvasRef    = useRef<HTMLCanvasElement>(null);
@@ -277,18 +279,25 @@ export default function DashboardPage() {
       </header>
 
       {/* ── Body ── */}
-      <div className="dash-body">
+      <div className={`dash-body ${sidebarOpen ? '' : 'sidebar-closed'}`}>
 
         {/* ── Sidebar ── */}
         <aside className="dash-sidebar">
           <div className="sidebar-head">
             <span>Lịch sử</span>
-            <button className="sidebar-new-btn" onClick={newJob}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M12 5v14M5 12h14"/>
-              </svg>
-              Mới
-            </button>
+            <div className="sidebar-actions">
+              <button className="sidebar-new-btn" onClick={newJob} title="Tạo mới">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+                Mới
+              </button>
+              <button className="sidebar-toggle-btn" onClick={() => setSidebarOpen(!sidebarOpen)} title="Thu/Phóng">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+              </button>
+            </div>
           </div>
           <div className="sidebar-jobs">
             {jobs.length === 0 ? (
@@ -399,6 +408,26 @@ export default function DashboardPage() {
             ) : (
               <div className="scanning-overlay">
                 <canvas ref={canvasRef} className="pdf-canvas" />
+                
+                {/* ── Highlights ── */}
+                {results.map(r => {
+                  if (r.x === undefined || r.y === undefined) return null;
+                  const scale = 1.6;
+                  const height = (r.height ?? 10) * scale;
+                  const top = (r.y * scale) - height;
+                  const left = (r.x * scale) - 2;
+                  const width = ((r.width ?? 30) * scale) + 4;
+                  
+                  return (
+                    <div
+                      key={r.id}
+                      className={`dimension-marker ${hoveredDimId === r.id ? 'is-active' : ''}`}
+                      style={{ top, left, width, height }}
+                      title={r.nominal}
+                    />
+                  );
+                })}
+
                 {scanning && (
                   <div className="scan-progress">
                     <span className="spinner"></span>
@@ -471,7 +500,12 @@ export default function DashboardPage() {
                 </thead>
                 <tbody>
                   {results.map(r => (
-                    <tr key={r.id}>
+                    <tr 
+                      key={r.id}
+                      className={r.status === 'CHECK' ? 'row-check' : ''}
+                      onMouseEnter={() => setHoveredDimId(r.id)}
+                      onMouseLeave={() => setHoveredDimId(null)}
+                    >
                       <td className="td-no">{r.no}</td>
                       <td>
                         <input

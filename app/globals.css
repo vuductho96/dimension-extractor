@@ -411,6 +411,10 @@ svg { display: block; }
   display: grid;
   grid-template-columns: 300px 1fr 380px;
   min-height: 0;
+  transition: grid-template-columns 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dash-body.sidebar-closed {
+  grid-template-columns: 60px 1fr 380px;
 }
 
 /* Sidebar — Job History */
@@ -447,6 +451,47 @@ svg { display: block; }
   cursor: pointer;
   text-transform: none;
   letter-spacing: 0;
+}
+.sidebar-new-btn:hover {
+  background: #d3e2ff;
+}
+.sidebar-actions {
+  display: flex;
+  gap: 6px;
+}
+.sidebar-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: white;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 150ms;
+}
+.sidebar-toggle-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.sidebar-closed .sidebar-new-text,
+.sidebar-closed .sidebar-title,
+.sidebar-closed .sidebar-jobs {
+  display: none;
+}
+.sidebar-closed .sidebar-head {
+  padding: 15px 10px;
+  justify-content: center;
+}
+.sidebar-closed .sidebar-actions {
+  flex-direction: column;
+}
+.sidebar-closed .sidebar-new-btn {
+  padding: 5px;
+  justify-content: center;
 }
 .sidebar-jobs {
   flex: 1;
@@ -598,10 +643,26 @@ svg { display: block; }
   cursor: pointer;
 }
 .pdf-canvas {
-  max-width: 100%;
-  box-shadow: 0 8px 35px rgba(7,21,55,.18);
-  border-radius: 4px;
+  margin: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
+
+.dimension-marker {
+  position: absolute;
+  border: 1.5px solid rgba(21, 80, 255, 0.4);
+  background: rgba(21, 80, 255, 0.05);
+  border-radius: 3px;
+  pointer-events: none;
+  transition: all 150ms ease-out;
+}
+.dimension-marker.is-active {
+  border-color: #f73b3b;
+  background: rgba(247, 59, 59, 0.15);
+  z-index: 10;
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(247, 59, 59, 0.25);
+}
+
 .scanning-overlay {
   position: relative;
   width: 100%;
@@ -734,6 +795,14 @@ svg { display: block; }
   border-bottom: 1px solid var(--line);
   vertical-align: middle;
 }
+
+table tr {
+  transition: background 150ms ease;
+}
+table tr:hover {
+  background: rgba(21, 80, 255, 0.03);
+}
+
 .res-table tr:hover td { background: var(--surface); }
 .res-table td input {
   width: 100%;
