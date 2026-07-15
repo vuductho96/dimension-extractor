@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dimension Extractor biến bản vẽ kỹ thuật thành dữ liệu kích thước, dung sai và ký hiệu có cấu trúc."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Dimension Extractor — OCR bản vẽ kỹ thuật</title>
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="content.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+
+    <header class="site-header" data-header>
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Dimension Extractor — về đầu trang">
+          <span class="brand-mark" aria-hidden="true">
+            <span class="brand-pixels"></span>
+            <span class="brand-d">D</span>
+          </span>
+          <span data-content="brand.name">Dimension Extractor</span>
+        </a>
+
+        <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span>
+          <span class="sr-only">Mở menu</span>
+        </button>
+
+        <nav class="main-nav" id="main-nav" data-menu aria-label="Điều hướng chính">
+          <a href="#tinh-nang">Tính năng</a>
+          <a href="#quy-trinh">Quy trình</a>
+          <a href="#minh-hoa">Minh họa</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <a class="button button-small header-cta" href="#dung-thu" data-content="nav.cta">Dùng thử</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <h1 data-content="hero.title">Biến bản vẽ kỹ thuật thành dữ liệu có cấu trúc.</h1>
+            <p data-content="hero.description">
+              Phát hiện kích thước, dung sai và ký hiệu. Kiểm tra, chỉnh sửa và xuất Excel trong một quy trình rõ ràng.
+            </p>
+            <div class="hero-actions">
+              <button class="button" type="button" data-run-sample>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 13h8M8 17h5" /></svg>
+                <span data-content="hero.primaryCta">Thử với bản vẽ mẫu</span>
+              </button>
+              <a class="button button-ghost" href="#quy-trinh">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="m10 8 6 4-6 4z" /></svg>
+                <span data-content="hero.secondaryCta">Xem quy trình</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="product-window reveal" data-product-window aria-label="Minh họa giao diện OCR bản vẽ">
+            <div class="window-toolbar">
+              <div class="mini-brand"><span class="mini-brand-mark">D</span><span>Dimension Extractor</span></div>
+              <div class="tool-cluster" aria-hidden="true">
+                <span class="tool active"><svg viewBox="0 0 24 24"><path d="m7 5 8 8-4 1-2 4z" /></svg></span>
+                <span class="tool"><svg viewBox="0 0 24 24"><path d="M8 12V6a2 2 0 0 1 4 0v5M12 10V5a2 2 0 0 1 4 0v7M16 10V7a2 2 0 0 1 4 0v7c0 4-3 7-7 7h-1c-3 0-5-2-6-4l-2-4a2 2 0 0 1 4-2l2 3" /></svg></span>
+                <span class="tool"><svg viewBox="0 0 24 24"><path d="M5 9V5h4M15 5h4v4M19 15v4h-4M9 19H5v-4" /></svg></span>
+                <span class="tool"><svg viewBox="0 0 24 24"><path d="M6 12h12" /></svg></span>
+                <span class="tool"><svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12" /></svg></span>
+                <span class="tool"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" /><path d="m16 16 4 4" /></svg></span>
+              </div>
+              <div class="tool-cluster" aria-hidden="true">
+                <span class="tool"><svg viewBox="0 0 24 24"><path d="M12 16V4M8 8l4-4 4 4M5 14v5h14v-5" /></svg></span>
+                <span class="tool"><svg viewBox="0 0 24 24"><path d="M12 4v12M8 12l4 4 4-4M5 14v5h14v-5" /></svg></span>
+              </div>
+            </div>
+
+            <div class="product-body">
+              <div class="drawing-stage">
+                <svg class="technical-drawing" viewBox="0 0 720 470" role="img" aria-label="Bản vẽ cơ khí với các kích thước được nhận diện">
+                  <defs>
+                    <pattern id="hero-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+                      <circle cx="1.5" cy="1.5" r="1.1" fill="#dce4f2" />
+                    </pattern>
+                    <marker id="hero-arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                      <path d="M8 0 0 4l8 4z" fill="#071537" />
+                    </marker>
+                    <pattern id="hero-hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(42)">
+                      <line x1="0" y1="0" x2="0" y2="9" stroke="#8b95a8" stroke-width="1" />
+                    </pattern>
+                  </defs>
+                  <rect width="720" height="470" fill="url(#hero-dots)" />
+                  <g fill="none" stroke="#0c1834" stroke-width="2.2">
+                    <path d="M172 208h108v-84h85v84h100v-38h75c24 0 43 19 43 43v44c0 24-19 43-43 43h-75v-38H365v84h-85v-84H172z" fill="#fff" />
+                    <path d="M280 124v222h85V124z" fill="url(#hero-hatch)" />
+                    <path d="M172 208h108v54H172z" fill="url(#hero-hatch)" />
+                    <path d="M365 208h100v54H365z" fill="url(#hero-hatch)" />
+                    <circle cx="211" cy="235" r="16" />
+                    <circle cx="534" cy="235" r="19" />
+                    <circle cx="534" cy="235" r="10" />
+                    <path d="M145 235h470" stroke-dasharray="16 7 3 7" stroke-width="1.2" />
+                    <path d="M322 90v-45M465 190V45M322 62h143" marker-start="url(#hero-arrow)" marker-end="url(#hero-arrow)" />
+                    <path d="M165 168 123 136M185 204l-34-26" />
+                    <path d="M574 172 620 136M580 200l32-42" />
+                  </g>
+                  <g class="dimension-label" font-family="Arial, sans-serif" fill="#071537">
+                    <rect x="350" y="42" width="88" height="40" rx="3" fill="#fff" stroke="#1550ff" stroke-width="2" stroke-dasharray="6 4" />
+                    <text x="394" y="68" text-anchor="middle" font-size="22">12.920</text>
+                    <rect x="60" y="112" width="86" height="40" rx="3" fill="#fff" stroke="#1550ff" stroke-width="2" stroke-dasharray="6 4" />
+                    <text x="103" y="138" text-anchor="middle" font-size="22">Ø8.00</text>
+                    <rect x="590" y="105" width="72" height="40" rx="3" fill="#fff" stroke="#1550ff" stroke-width="2" stroke-dasharray="6 4" />
+                    <text x="626" y="131" text-anchor="middle" font-size="22">R2.5</text>
+                    <rect x="575" y="285" width="112" height="60" rx="3" fill="#fff" stroke="#1550ff" stroke-width="2" stroke-dasharray="6 4" />
+                    <text x="631" y="310" text-anchor="middle" font-size="20">+0.002</text>
+                    <text x="631" y="334" text-anchor="middle" font-size="20">−0.002</text>
+                  </g>
+                  <g class="ocr-corners" stroke="#1550ff" stroke-width="4">
+                    <path d="M348 50v-10h10M430 40h10v10M440 74v10h-10M358 84h-10V74" />
+                  </g>
+                </svg>
+                <div class="scan-line" aria-hidden="true"></div>
+                <div class="scale-label">10 mm</div>
+              </div>
+
+              <div class="result-panel">
+                <div class="result-heading">
+                  <div><strong>Kết quả trích xuất</strong><span data-scan-status>Sẵn sàng</span></div>
+                  <span class="filter-icon" aria-hidden="true">⌕</span>
+                </div>
+                <div class="result-table" role="table" aria-label="Kết quả OCR mẫu">
+                  <div class="table-row table-head" role="row"><span>No.</span><span>Nominal</span><span>Tol −</span><span>Tol +</span><span>Status</span></div>
+                  <div class="table-row" role="row"><span>1</span><strong>12.920</strong><span>—</span><span>—</span><span class="status-ok"><i></i>OK</span></div>
+                  <div class="table-row" role="row"><span>2</span><strong>Ø8.00</strong><span>—</span><span>—</span><span class="status-ok"><i></i>OK</span></div>
+                  <div class="table-row" role="row"><span>3</span><strong>R2.5</strong><span>—</span><span>—</span><span class="status-ok"><i></i>OK</span></div>
+                  <div class="table-row" role="row"><span>4</span><strong>12.920</strong><span>0.002</span><span>0.002</span><span class="status-ok"><i></i>OK</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section features-section" id="tinh-nang">
+        <div class="container">
+          <div class="section-heading reveal">
+            <h2 data-content="features.title">Đọc đúng thứ kỹ sư cần.</h2>
+            <p data-content="features.description">Tập trung vào dữ liệu kiểm tra, không biến bản vẽ thành một mớ văn bản.</p>
+          </div>
+          <div class="feature-rail" data-feature-list></div>
+          <div class="feature-visual reveal" aria-label="Minh họa liên kết vùng OCR với dữ liệu đầu ra">
+            <div class="feature-blueprint">
+              <svg viewBox="0 0 520 300" role="img" aria-label="Mặt bích cơ khí và vùng kích thước OCR">
+                <defs><marker id="small-arrow" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M7 0 0 3.5 7 7z" fill="#071537" /></marker></defs>
+                <g fill="none" stroke="#071537" stroke-width="1.8">
+                  <path d="M150 66h220l38 38v112l-38 38H150l-38-38V104z" />
+                  <circle cx="260" cy="160" r="56" /><circle cx="260" cy="160" r="35" />
+                  <circle cx="165" cy="106" r="14" /><circle cx="355" cy="106" r="14" /><circle cx="165" cy="214" r="14" /><circle cx="355" cy="214" r="14" />
+                  <path d="M82 160h356M260 35v250" stroke-dasharray="12 6 2 6" stroke-width="1" />
+                  <path d="M150 48h220" marker-start="url(#small-arrow)" marker-end="url(#small-arrow)" />
+                  <path d="M150 58V38M370 58V38" />
+                </g>
+                <g font-family="Arial, sans-serif" font-size="17" fill="#071537">
+                  <rect x="216" y="30" width="88" height="30" fill="#fff" stroke="#1550ff" stroke-width="2" stroke-dasharray="5 4" /><text x="260" y="51" text-anchor="middle">70 ±0.10</text>
+                  <rect x="28" y="145" width="88" height="30" fill="#fff" stroke="#1550ff" stroke-width="2" stroke-dasharray="5 4" /><text x="72" y="166" text-anchor="middle">50 ±0.05</text>
+                  <rect x="392" y="86" width="92" height="48" fill="#fff" stroke="#1550ff" stroke-width="2" stroke-dasharray="5 4" /><text x="438" y="107" text-anchor="middle">Ø20 H7</text><text x="438" y="126" text-anchor="middle" font-size="14">+0.021 / 0</text>
+                </g>
+              </svg>
+            </div>
+            <div class="visual-connector" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="editable-table">
+              <div class="editable-head"><span>STEP</span><span>Nội dung</span><span>Giá trị</span><span>Dung sai</span><span>Trạng thái</span></div>
+              <div class="editable-row"><span>10</span><span>Khoảng cách</span><label><input value="70" aria-label="Giá trị bước 10" /></label><label><input value="±0.10" aria-label="Dung sai bước 10" /></label><span class="status-ok"><i></i>OK</span></div>
+              <div class="editable-row"><span>20</span><span>Khoảng cách</span><label><input value="50" aria-label="Giá trị bước 20" /></label><label><input value="±0.05" aria-label="Dung sai bước 20" /></label><span class="status-ok"><i></i>OK</span></div>
+              <div class="editable-row"><span>30</span><span>Đường kính</span><label><input value="20" aria-label="Giá trị bước 30" /></label><label><input value="+0.021 / 0" aria-label="Dung sai bước 30" /></label><span class="status-ok"><i></i>OK</span></div>
+              <div class="editable-row"><span>40</span><span>Bán kính</span><label><input value="3" aria-label="Giá trị bước 40" /></label><label><input value="—" aria-label="Dung sai bước 40" /></label><span class="status-ok"><i></i>OK</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section workflow-section" id="quy-trinh">
+        <div class="container">
+          <div class="section-heading centered reveal">
+            <h2 data-content="workflow.title">Từ PDF đến Excel trong 4 bước.</h2>
+            <p data-content="workflow.description">Một luồng làm việc đủ ngắn để dùng hằng ngày, đủ rõ để kiểm soát kết quả.</p>
+          </div>
+          <div class="workflow-rail" data-workflow-list></div>
+        </div>
+      </section>
+
+      <section class="section example-section" id="minh-hoa">
+        <div class="container">
+          <div class="example-header reveal">
+            <div>
+              <h2 data-content="example.title">Một vùng quét. Một dòng dữ liệu rõ ràng.</h2>
+              <p data-content="example.description">Kết quả giữ đúng ngữ cảnh kỹ thuật để bạn kiểm tra nhanh trước khi đưa vào báo cáo.</p>
+            </div>
+            <button class="text-link" type="button" data-run-example>Xem hiệu ứng quét <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="before-after reveal" data-example-visual>
+            <div class="before-panel">
+              <div class="panel-label"><span>Bản vẽ đầu vào</span><small>PDF · Trang 01</small></div>
+              <div class="shaft-drawing">
+                <svg viewBox="0 0 650 330" role="img" aria-label="Bản vẽ trục cơ khí đầu vào">
+                  <defs><marker id="shaft-arrow" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M7 0 0 3.5 7 7z" fill="#071537" /></marker></defs>
+                  <g fill="none" stroke="#071537" stroke-width="2">
+                    <path d="M130 125h130v-34h210v34h50v80h-50v34H260v-34H130z" />
+                    <path d="M105 165h440" stroke-dasharray="15 7 2 7" stroke-width="1" />
+                    <path d="M260 70v-34M470 70V36M260 52h210" marker-start="url(#shaft-arrow)" marker-end="url(#shaft-arrow)" />
+                    <path d="M90 125H55M90 205H55M72 125v80" marker-start="url(#shaft-arrow)" marker-end="url(#shaft-arrow)" />
+                    <path d="M130 255v38M520 220v73M130 278h390" marker-start="url(#shaft-arrow)" marker-end="url(#shaft-arrow)" />
+                    <path d="M470 91h52v34M470 239h52v-34" />
+                  </g>
+                  <g font-family="Arial, sans-serif" font-size="20" fill="#071537">
+                    <text x="365" y="45" text-anchor="middle">65</text><text x="63" y="171" text-anchor="middle" transform="rotate(-90 63 171)">Ø20</text><text x="325" y="308" text-anchor="middle">12.920</text><text x="536" y="176">Ø8.00</text><text x="118" y="230">R2.5</text>
+                    <rect x="280" y="265" width="92" height="38" fill="#fff" stroke="#1550ff" stroke-width="2.5" stroke-dasharray="6 4" /><text x="326" y="290" text-anchor="middle">12.920</text>
+                  </g>
+                </svg>
+                <span class="example-scan-line" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="transfer-arrow" aria-hidden="true"><span></span>→</div>
+            <div class="after-panel">
+              <div class="panel-label"><span>Dữ liệu đầu ra</span><small>Đã kiểm tra</small></div>
+              <div class="output-record">
+                <div class="record-index">01</div>
+                <dl>
+                  <div><dt>Loại</dt><dd>Khoảng cách</dd></div>
+                  <div><dt>Nominal</dt><dd>12.920</dd></div>
+                  <div><dt>Tol −</dt><dd>0.002</dd></div>
+                  <div><dt>Tol +</dt><dd>0.002</dd></div>
+                  <div><dt>Đơn vị</dt><dd>mm</dd></div>
+                  <div><dt>Trạng thái</dt><dd class="status-ok"><i></i>OK</dd></div>
+                </dl>
+              </div>
+              <button class="export-button" type="button" data-export-demo>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 13h8M8 17h8" /></svg>
+                Xuất Excel mẫu
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq-section" id="faq">
+        <div class="container">
+          <div class="section-heading centered reveal"><h2 data-content="faq.title">Câu hỏi thường gặp.</h2></div>
+          <div class="faq-grid" data-faq-list></div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="dung-thu">
+        <div class="blueprint-decor blueprint-left" aria-hidden="true"></div>
+        <div class="blueprint-decor blueprint-right" aria-hidden="true"></div>
+        <div class="container cta-inner reveal">
+          <h2 data-content="cta.title">Bắt đầu với một bản vẽ thật.</h2>
+          <p data-content="cta.description">Thả bản vẽ mẫu, xem dữ liệu được tách ra và quyết định phần nào cần kiểm tra lại.</p>
+          <div class="cta-actions">
+            <label class="button button-light file-button">
+              <input type="file" accept=".pdf,.png,.jpg,.jpeg" data-file-input />
+              <span data-file-label>Dùng thử ngay</span>
+              <span aria-hidden="true">→</span>
+            </label>
+            <button class="button-link-light" type="button" data-run-sample-bottom>Xem bản vẽ mẫu <span aria-hidden="true">→</span></button>
+          </div>
+          <p class="cta-note" data-upload-note>Trang mẫu chỉ hiển thị luồng giao diện; tệp không được tải lên máy chủ.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><span class="brand-pixels"></span><span class="brand-d">D</span></span><span>Dimension Extractor</span></a>
+        <p data-content="brand.tagline">OCR bản vẽ dành cho đội ngũ kỹ thuật.</p>
+        <p class="footer-meta">Static landing page · <span data-current-year></span></p>
+      </div>
+    </footer>
+
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </body>
+</html>
